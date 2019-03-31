@@ -1,0 +1,13 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: monitor
+
+eureka:
+  client:
+    # register-with-eureka: true
+    # fetch-registry: true
+    service-url:
+      default-zone: http://seckill:P@ssw0rd@localhost:8761/eureka
