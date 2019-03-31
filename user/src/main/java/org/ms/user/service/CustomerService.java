@@ -24,4 +24,8 @@ public class CustomerService {
     public Customer create(Customer customer) {
         return customerRepository.save(customer);
     }
+
+    public Customer findBy(String name) {
+        return customerRepository.findOneByUserName(name);
+    }
 }

@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @create: 2019-03-31 12:28
  **/
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
+
+    Customer findOneByUserName(String name);
 }
