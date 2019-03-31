@@ -1,5 +1,6 @@
 package org.ms.user.web;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import java.util.List;
 import org.ms.user.domain.Customer;
 import org.ms.user.service.CustomerService;
@@ -23,6 +24,8 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping
+    //TODO 2019-03-31 Zhenglai Zhang: verify hystrix dashboard
+    @HystrixCommand
     public List<Customer> findAll() {
         return customerService.findAll();
     }
