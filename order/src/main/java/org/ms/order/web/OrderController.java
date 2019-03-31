@@ -4,6 +4,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import org.ms.order.domain.Order;
 import org.ms.order.service.OrderService;
+import org.ms.service.IOrderService;
+import org.ms.service.dto.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 @RequestMapping("/api/orders")
-public class OrderController {
+public class OrderController implements IOrderService {
 
     @PostConstruct
     public void init() {
@@ -44,7 +46,14 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public String getMyOrder(@PathVariable Long id) {
-        return orderService.findOne(id).getTitle();
+    @Override
+    public OrderDTO getMyOrder(@PathVariable Long id) {
+        var order = orderService.findOne(id);
+        var dto = new OrderDTO();
+        dto.setId(order.getId());
+        dto.setDetail(order.getDetail());
+        dto.setAmount(order.getAmount());
+        dto.setTitle(order.getTitle());
+        return dto;
     }
 }
